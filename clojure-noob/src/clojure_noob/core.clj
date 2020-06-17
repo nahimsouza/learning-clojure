@@ -1,8 +1,9 @@
-; Contains a main function and the first exercises of Brave Clojure (Chap 3)
+; This file contains a main function and the first exercises of Brave Clojure (Chap 3)
 
 (ns clojure-noob.core
   (:gen-class))
 
+; Defining hobbit body parts
 (def asym-hobbit-body-parts [{:name "head" :size 3}
                              {:name "left-eye" :size 1}
                              {:name "left-ear" :size 1}
@@ -23,11 +24,15 @@
                              {:name "left-achilles" :size 1}
                              {:name "left-foot" :size 2}])
 
+; Defining function to return a matching body part
 (defn matching-part
+  "Generates a matching (simetric) body part. Expects a body part as parameter with :name and :size"
   [part]
   {:name (clojure.string/replace (:name part) #"^left-" "right-")
    :size (:size part)})
 
+
+; Define function that symetrize a list of body-parts
 (defn symmetrize-body-parts
   "Expects a seq of maps that have a :name and :size"
   [asym-body-parts]
@@ -93,14 +98,6 @@
   [dec-by]
   #(- % dec-by))
 
-
-(defn better-symmetrize-body-partsa
-  "Expects a seq of maps that have a :name and :size"
-  [asym-body-parts]
-  (reduce (fn [final-body-parts part]
-            (into final-body-parts (set [part (matching-part part)]))) ; function
-          []                                                           ; initial value
-          asym-body-parts))                                            ; vector of values to apply the function
 
 (defn mapset
   "mapset function returns is like a map, but returns a hash-set"
